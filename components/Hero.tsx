@@ -1,47 +1,37 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { portfolioImages } from "@/data/portfolio";
-import { ArrowUpRight } from "@/components/ui/Icons";
+import { ArrowDown, ArrowUpRight } from "@/components/ui/Icons";
 import { MaskedWords, premiumEase } from "@/components/ui/Motion";
 
 export function Hero() {
-  const { scrollY } = useScroll();
-  const backgroundY = useTransform(scrollY, [0, 1000], [0, 80]);
+  const { scrollYProgress } = useScroll();
+  const nameY = useTransform(scrollYProgress, [0, 0.16], [0, -70]);
+  const orbScale = useTransform(scrollYProgress, [0, 0.16], [1, 1.45]);
 
   return (
-    <section className="reference-hero" id="top" aria-labelledby="hero-title">
-      <motion.div className="reference-hero__media" style={{ y: backgroundY }}>
-        {portfolioImages.profile ? (
-          <Image src={portfolioImages.profile} alt="Portrait of Abdullah Ibrahim" fill priority sizes="100vw" />
-        ) : (
-          <div className="reference-hero__placeholder" role="img" aria-label="Profile image placeholder">
-            <span>[PROFILE / HERO IMAGE — INSERT HERE]</span>
-          </div>
-        )}
-      </motion.div>
-      <div className="reference-grid" aria-hidden="true" />
+    <section className="cinema-hero" id="top" aria-labelledby="hero-title">
+      <div className="cinema-hero__coordinate cinema-hero__coordinate--top">N 33° 41&apos; / E 73° 03&apos;</div>
+      <div className="cinema-hero__coordinate cinema-hero__coordinate--bottom">Digital systems / 2026</div>
 
-      <h1 id="hero-title"><MaskedWords text="ABDULLAH IBRAHIM" /></h1>
-
-      <motion.div className="reference-hero__roles" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.55 }}>
-        <span>Backend developer</span><span>API development</span><span>AI integration</span>
+      <motion.div className="cinema-hero__identity" style={{ y: nameY }}>
+        <p>Independent developer / backend systems</p>
+        <h1 id="hero-title"><MaskedWords text="Abdullah Ibrahim" /></h1>
+        <span>Python • Django • AI Builder</span>
       </motion.div>
 
-      <motion.div className="reference-hero__statement" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.78, duration: 0.65, ease: premiumEase }}>
-        <p>Engineering digital products built for scale and real-world use.</p>
+      <motion.div className="signal-orb" style={{ scale: orbScale }} aria-hidden="true">
+        <i /><i /><i /><i />
+        <span>AI</span>
       </motion.div>
 
-      <motion.div className="reference-hero__detail" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.92, duration: 0.6, ease: premiumEase }}>
-        <ArrowUpRight />
-        <div className="reference-hero__detail-image">
-          {portfolioImages.heroDetail ? <Image src={portfolioImages.heroDetail} alt="Selected detail from Abdullah Ibrahim's work" fill sizes="160px" /> : <span>[DETAIL IMAGE]</span>}
-        </div>
-      </motion.div>
+      <motion.a className="cinema-hero__cta" href="#work" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.15, duration: 0.7, ease: premiumEase }}>
+        <span>Enter selected work</span><ArrowUpRight />
+      </motion.a>
 
-      <motion.div className="reference-hero__year" initial={{ opacity: 0, x: 35 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.85, duration: 0.7, ease: premiumEase }}>20<br />26</motion.div>
-      <motion.div className="reference-hero__position" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>Python • Django • AI Builder</motion.div>
+      <motion.a className="cinema-scroll" href="#about" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.35 }}>
+        <span>Scroll to explore</span><ArrowDown />
+      </motion.a>
     </section>
   );
 }

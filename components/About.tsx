@@ -1,34 +1,55 @@
 "use client";
 
 import Image from "next/image";
-import { portfolioImages } from "@/data/portfolio";
-import { ArrowUpRight } from "@/components/ui/Icons";
-import { Reveal } from "@/components/ui/Motion";
-import { SectionMeta } from "@/components/ui/SectionMeta";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { portfolioImages, portfolioLinks, technologies } from "@/data/portfolio";
+import { ArrowDown } from "@/components/ui/Icons";
+import { premiumEase, Reveal } from "@/components/ui/Motion";
+import { SmartLink } from "@/components/ui/SmartLink";
 
 export function About() {
+  const [tab, setTab] = useState<"profile" | "stack">("profile");
+
   return (
-    <section className="reference-section reference-about" id="about" aria-labelledby="about-title">
-      <div className="reference-grid" aria-hidden="true" />
-      <SectionMeta number="01" label="About me" />
-      <div className="reference-about__content">
-        <Reveal className="reference-about__label"><span id="about-title">About me</span></Reveal>
-        <Reveal className="reference-about__copy" delay={0.06}>
-          Abdullah Ibrahim is a backend-focused developer building structured, scalable digital products. Working across Python, Django, APIs, AI integration, automation, databases, and media workflows, his focus stays on how products function, grow, and remain useful beyond launch.
+    <section className="cinema-section cinema-about" id="about" aria-labelledby="about-title">
+      <div className="cinema-panel cinema-about__panel">
+        <header className="cinema-panel__header">
+          <span>01 / Identity</span><h2 id="about-title">About</h2><span>Abdullah Ibrahim</span>
+        </header>
+
+        <Reveal className="cinema-about__statement">
+          <p>“I build serious digital products where architecture, intelligence, and useful interaction work as one system.”</p>
         </Reveal>
-        <Reveal className="reference-about__action" delay={0.12}>
-          <ArrowUpRight />
-          <a className="reference-button" href="#services">More about the work</a>
-        </Reveal>
+
+        <div className="cinema-about__tabs" role="tablist" aria-label="About Abdullah">
+          <button role="tab" aria-selected={tab === "profile"} onClick={() => setTab("profile")}><span>01</span>Profile</button>
+          <button role="tab" aria-selected={tab === "stack"} onClick={() => setTab("stack")}><span>02</span>Technical core</button>
+        </div>
+
+        <div className="cinema-about__detail">
+          <div className="cinema-about__portrait">
+            {portfolioImages.profile ? <Image src={portfolioImages.profile} alt="Portrait of Abdullah Ibrahim" fill sizes="(max-width: 760px) 90vw, 32vw" /> : <div role="img" aria-label="Profile image placeholder"><span>[PROFILE IMAGE — INSERT HERE]</span></div>}
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.div className="cinema-about__tab-content" key={tab} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.45, ease: premiumEase }}>
+              {tab === "profile" ? (
+                <>
+                  <span className="eyebrow">Backend developer / AI builder</span>
+                  <h3>Products engineered beyond the demo.</h3>
+                  <p>Focused on backend systems, REST APIs, AI-powered applications, automation, database-driven products, and digital media workflows. The goal is always the same: dependable software with a clear reason to exist.</p>
+                </>
+              ) : (
+                <>
+                  <span className="eyebrow">Selected technologies</span>
+                  <ul>{technologies.map((technology, index) => <li key={technology.name}><span>0{index + 1}</span>{technology.name}<small>{technology.detail}</small></li>)}</ul>
+                </>
+              )}
+              <SmartLink href={portfolioLinks.cv} className="outline-action" download>Download CV <ArrowDown /></SmartLink>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
-      <Reveal className="reference-markers"><span>º</span><span>∞</span><span>º</span></Reveal>
-      <Reveal className="reference-about__image" amount={0.25}>
-        {portfolioImages.heroDetail ? (
-          <Image src={portfolioImages.heroDetail} alt="A detail representing Abdullah Ibrahim's work" fill sizes="(max-width: 760px) 90vw, 32vw" />
-        ) : (
-          <div role="img" aria-label="About image placeholder"><span>[PROFILE DETAIL IMAGE — INSERT HERE]</span></div>
-        )}
-      </Reveal>
     </section>
   );
 }

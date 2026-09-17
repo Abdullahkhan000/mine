@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { portfolioLinks } from "@/data/portfolio";
-import "@fontsource-variable/inter";
-import "@fontsource/bebas-neue";
-import "@fontsource/fira-mono/400.css";
-import "@fontsource/fira-mono/500.css";
+import "@fontsource-variable/bitter";
+import "@fontsource/lato/300.css";
+import "@fontsource/lato/400.css";
+import "@fontsource/lato/700.css";
+import "@fontsource/nanum-myeongjo/400.css";
+import "@fontsource/nanum-myeongjo/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0c0c0c",
+  themeColor: "#050505",
   colorScheme: "dark",
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { MotionConfig, motion, useReducedMotion } from "framer-motion";
+import { MotionConfig, motion } from "framer-motion";
 import type { PropsWithChildren, ReactNode } from "react";
 
 export const premiumEase = [0.22, 1, 0.36, 1] as const;
@@ -38,15 +38,13 @@ export function Reveal({
 }
 
 export function MaskedWords({ text, className }: { text: string; className?: string }) {
-  const reduceMotion = useReducedMotion();
-
   return (
     <span className={className}>
       <span className="sr-only">{text}</span>
       {text.split(" ").map((word, index) => (
         <span className="word-mask" aria-hidden="true" key={`${word}-${index}`}>
           <motion.span
-            initial={reduceMotion ? false : { y: "115%", rotate: 2 }}
+            initial={{ y: "115%", rotate: 2 }}
             animate={{ y: 0, rotate: 0 }}
             transition={{ duration: 0.72, delay: 0.08 + index * 0.04, ease: premiumEase }}
           >

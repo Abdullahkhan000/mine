@@ -1,50 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { services } from "@/data/portfolio";
-import { Reveal } from "@/components/ui/Motion";
-import { SectionMeta } from "@/components/ui/SectionMeta";
+import { ArrowUpRight } from "@/components/ui/Icons";
+import { premiumEase, Reveal } from "@/components/ui/Motion";
 
 export function Services() {
-  const [active, setActive] = useState(0);
-  const service = services[active];
-
   return (
-    <section className="reference-section reference-services" id="services" aria-labelledby="services-title">
-      <div className="reference-grid" aria-hidden="true" />
-      <SectionMeta number="04" label="Services" />
-      <h2 className="sr-only" id="services-title">Services and development capabilities</h2>
-      <div className="reference-services__composition">
-        <div className="reference-services__list">
-          {services.map((item, index) => (
-            <button
-              key={item.title}
-              className={index === active ? "is-active" : ""}
-              type="button"
-              onMouseEnter={() => setActive(index)}
-              onFocus={() => setActive(index)}
-              onClick={() => setActive(index)}
-              aria-pressed={index === active}
-            >
-              <span>¬</span>{item.title}
-            </button>
+    <section className="cinema-section cinema-services" id="services" aria-labelledby="services-title">
+      <div className="cinema-panel cinema-services__panel">
+        <header className="cinema-panel__header">
+          <span>02 / Capability</span><h2 id="services-title">Services</h2><span>Systems that deliver</span>
+        </header>
+        <Reveal className="cinema-services__intro">
+          <p>From an early technical decision to a production-ready release, every layer is designed to support the product—not complicate it.</p>
+        </Reveal>
+        <div className="cinema-services__grid">
+          {services.map((service, index) => (
+            <motion.article key={service.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.55, delay: (index % 3) * 0.07, ease: premiumEase }}>
+              <div className="service-glyph" aria-hidden="true"><i /><i /><span>{service.code}</span></div>
+              <div><small>0{index + 1}</small><h3>{service.title}</h3><p>{service.detail}</p></div>
+              <ArrowUpRight />
+            </motion.article>
           ))}
         </div>
-
-        <motion.div className="reference-services__visual" key={service.title} initial={false} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
-          <div className={`service-diagram service-diagram--${active + 1}`} aria-hidden="true">
-            <span className="service-diagram__core">{service.code}</span>
-            <span /><span /><span /><span />
-          </div>
-          <p>[{service.title.toUpperCase()} SYSTEM VISUAL]</p>
-        </motion.div>
-
-        <Reveal className="reference-services__detail">
-          <p>{service.detail}</p>
-          <div><span>Phase 1 : Definition</span><span>Phase 2 : Execution</span></div>
-          <small>© {new Date().getFullYear()}</small>
-        </Reveal>
       </div>
     </section>
   );

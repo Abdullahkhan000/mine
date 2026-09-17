@@ -8,6 +8,7 @@ export type Project = {
   liveUrl: string;
   githubUrl: string;
   featured: boolean;
+  year: string;
 };
 
 export const portfolioLinks = {
@@ -27,19 +28,13 @@ export const portfolioLinks = {
 
 export const portfolioImages = {
   profile: null as string | null,
-  heroDetail: null as string | null,
-  processDiscover: null as string | null,
-  processArchitect: null as string | null,
-  processBuild: null as string | null,
-  processRefine: null as string | null,
-  contactVisual: null as string | null,
 } as const;
 
 export const navigation = [
   { label: "Home", href: "#top" },
-  { label: "Works", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Projects", href: "#work" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -63,6 +58,7 @@ export const projects: Project[] = [
     liveUrl: portfolioLinks.cybercarnage,
     githubUrl: portfolioLinks.cybercarnageGithub,
     featured: true,
+    year: "2026",
   },
   {
     title: "[PROJECT 02 TITLE]",
@@ -74,6 +70,7 @@ export const projects: Project[] = [
     liveUrl: portfolioLinks.project02,
     githubUrl: portfolioLinks.project02Github,
     featured: false,
+    year: "[YEAR]",
   },
   {
     title: "[PROJECT 03 TITLE]",
@@ -85,6 +82,7 @@ export const projects: Project[] = [
     liveUrl: portfolioLinks.project03,
     githubUrl: portfolioLinks.project03Github,
     featured: false,
+    year: "[YEAR]",
   },
 ];
 
@@ -97,37 +95,6 @@ export const services = [
   { title: "Media Processing", detail: "Dependable FFmpeg and video-encoding pipelines for digital media products.", code: "06" },
 ] as const;
 
-export const processSteps = [
-  {
-    number: "01",
-    title: "Discover",
-    text: "Clarify the product goal, the people using it, the constraints, and the critical path before choosing implementation details.",
-    imageKey: "processDiscover",
-    placeholder: "DISCOVERY VISUAL — INSERT HERE",
-  },
-  {
-    number: "02",
-    title: "Architect",
-    text: "Shape the data model, system boundaries, API contracts, and operational flow around the real requirements.",
-    imageKey: "processArchitect",
-    placeholder: "ARCHITECTURE VISUAL — INSERT HERE",
-  },
-  {
-    number: "03",
-    title: "Build",
-    text: "Implement the central experience with clear code, dependable behavior, and room for the product to evolve.",
-    imageKey: "processBuild",
-    placeholder: "BUILD VISUAL — INSERT HERE",
-  },
-  {
-    number: "04",
-    title: "Refine",
-    text: "Test edge cases, tighten performance and interaction details, then prepare a maintainable release.",
-    imageKey: "processRefine",
-    placeholder: "REFINEMENT VISUAL — INSERT HERE",
-  },
-] as const;
-
 export const technologies = [
   { name: "Python", detail: "Backend systems, automation, and data workflows" },
   { name: "Django", detail: "Web applications and dependable server architecture" },
@@ -137,22 +104,6 @@ export const technologies = [
   { name: "FFmpeg", detail: "Media transformation and encoding pipelines" },
   { name: "JavaScript", detail: "Responsive product interfaces" },
   { name: "Tailwind CSS", detail: "Consistent, maintainable interface systems" },
-] as const;
-
-export const capabilities = [
-  { title: "API Architecture", text: "Clear interfaces for products, integrations, and future clients.", code: "01", tone: "red" },
-  { title: "AI Workflows", text: "Intelligence placed where it improves a real user or business task.", code: "02", tone: "blue" },
-  { title: "Automation", text: "Repeatable tools that remove manual operational steps.", code: "03", tone: "silver" },
-  { title: "Media Pipelines", text: "Reliable processing across formats, encodes, and destinations.", code: "04", tone: "orange" },
-] as const;
-
-export const systemRisks = [
-  ["Disconnected systems", "create avoidable friction"],
-  ["Vague API contracts", "slow every integration"],
-  ["Manual workflows", "waste time at scale"],
-  ["Unstructured data", "limits product decisions"],
-  ["Generic AI features", "add noise without utility"],
-  ["Fragile media pipelines", "break under real workloads"],
 ] as const;
 
 export const isPlaceholderLink = (value: string) => /(_HERE|EMAIL_HERE)/.test(value);
