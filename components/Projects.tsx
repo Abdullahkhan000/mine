@@ -2,56 +2,66 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { projects, type Project } from "@/data/portfolio";
+import { useState } from "react";
+import { projects } from "@/data/portfolio";
 import { ArrowUpRight } from "@/components/ui/Icons";
-import { premiumEase } from "@/components/ui/Motion";
-import { SectionMeta } from "@/components/ui/SectionMeta";
+import { premiumEase, Reveal } from "@/components/ui/Motion";
 import { SmartLink } from "@/components/ui/SmartLink";
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  return (
-    <motion.article
-      className={`reference-project ${project.featured ? "reference-project--featured" : ""}`}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.65, delay: (index % 2) * 0.08, ease: premiumEase }}
-    >
-      <div className="reference-project__visual">
-        {project.image ? (
-          <Image src={project.image} alt={`${project.title} project interface`} fill sizes="(max-width: 760px) 100vw, 50vw" />
-        ) : (
-          <div className={`reference-project__placeholder reference-project__placeholder--${index + 1}`} role="img" aria-label={project.imagePlaceholder}>
-            <span>[{project.imagePlaceholder}]</span>
-            <small>{project.featured ? "PRIMARY CASE STUDY / 16:10" : "PROJECT ASSET / 3:2"}</small>
-          </div>
-        )}
-        <div className="reference-project__actions">
-          <SmartLink href={project.liveUrl}>Live <ArrowUpRight /></SmartLink>
-          <SmartLink href={project.githubUrl}>GitHub <ArrowUpRight /></SmartLink>
-        </div>
-      </div>
-      <div className="reference-project__body">
-        <div className="reference-project__heading">
-          <span>{project.featured ? "Featured / 01" : `Project / 0${index + 1}`}</span>
-          <h3>{project.title}</h3>
-          <p>{project.category}</p>
-        </div>
-        <p className="reference-project__description">{project.description}</p>
-        <div className="reference-project__stack">{project.technologies.map((item) => <span key={item}>{item}</span>)}</div>
-      </div>
-    </motion.article>
-  );
-}
-
 export function Projects() {
+  const [active, setActive] = useState(0);
+  const project = projects[active];
+
+  function step(direction: number) {
+    setActive((current) => (current + direction + projects.length) % projects.length);
+  }
+
   return (
-    <section className="reference-section reference-work" id="work" aria-labelledby="work-title">
-      <div className="reference-grid" aria-hidden="true" />
-      <SectionMeta number="03" label="Selected work" />
-      <h2 className="sr-only" id="work-title">Selected work</h2>
-      <div className="reference-work__grid">
-        {projects.map((project, index) => <ProjectCard project={project} index={index} key={project.title} />)}
+    <section className="cinema-section cinema-work" id="work" aria-labelledby="work-title">
+      <div className="cinema-panel cinema-work__panel">
+        <header className="cinema-panel__header">
+          <span>03 / Selected</span><h2 id="work-title">Projects</h2><span>{String(active + 1).padStart(2, "0")} — {String(projects.length).padStart(2, "0")}</span>
+        </header>
+        <Reveal className="cinema-work__intro"><p>Selected products and systems. Drag through the archive—or use the controls—to inspect each build.</p></Reveal>
+
+        <div className="project-stage" aria-live="polite">
+          {projects.map((item, index) => {
+            const offset = (index - active + projects.length) % projects.length;
+            const placement = offset === 0 ? "active" : offset === 1 ? "next" : "previous";
+            const motionState = placement === "active"
+              ? { x: "0%", scale: 1, rotateY: 0, opacity: 1, zIndex: 3 }
+              : placement === "next"
+                ? { x: "68%", scale: 0.72, rotateY: -17, opacity: 0.28, zIndex: 1 }
+                : { x: "-68%", scale: 0.72, rotateY: 17, opacity: 0.28, zIndex: 1 };
+            return (
+              <motion.article className={`project-frame is-${placement}`} key={item.title} animate={motionState} initial={false} transition={{ duration: 0.75, ease: premiumEase }}>
+                <div className="project-frame__media">
+                  {item.image ? <Image src={item.image} alt={`${item.title} project interface`} fill sizes="(max-width: 760px) 92vw, 68vw" /> : <div className={`project-frame__placeholder project-frame__placeholder--${index + 1}`} role="img" aria-label={item.imagePlaceholder}><span>[{item.imagePlaceholder}]</span><i /><i /><i /></div>}
+                  <div className="project-frame__scan" aria-hidden="true" />
+                  <span className="project-frame__year">{item.year}</span>
+                  {placement !== "active" && <button className="project-frame__activate" type="button" onClick={() => setActive(index)} aria-label={`View ${item.title}`} />}
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        <div className="project-detail">
+          <motion.div key={project.title} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: premiumEase }}>
+            <span>{project.category}</span><h3>{project.title}</h3><p>{project.description}</p>
+            <div className="project-detail__stack">{project.technologies.map((technology) => <small key={technology}>{technology}</small>)}</div>
+          </motion.div>
+          <div className="project-detail__links">
+            <SmartLink href={project.liveUrl}>Live project <ArrowUpRight /></SmartLink>
+            <SmartLink href={project.githubUrl}>Source code <ArrowUpRight /></SmartLink>
+          </div>
+        </div>
+
+        <div className="project-controls">
+          <button type="button" onClick={() => step(-1)} aria-label="Previous project">← <span>Previous</span></button>
+          <div>{projects.map((item, index) => <button className={index === active ? "is-active" : ""} key={item.title} onClick={() => setActive(index)} type="button" aria-label={`Show ${item.title}`} />)}</div>
+          <button type="button" onClick={() => step(1)} aria-label="Next project"><span>Next</span> →</button>
+        </div>
       </div>
     </section>
   );
