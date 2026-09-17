@@ -7,7 +7,7 @@ export const premiumEase = [0.22, 1, 0.36, 1] as const;
 
 export function MotionProvider({ children }: PropsWithChildren) {
   return (
-    <MotionConfig reducedMotion="user" transition={{ duration: 0.8, ease: premiumEase }}>
+    <MotionConfig reducedMotion="user" transition={{ duration: 0.62, ease: premiumEase }}>
       {children}
     </MotionConfig>
   );
@@ -27,10 +27,10 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 38 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
-      transition={{ duration: 0.85, delay, ease: premiumEase }}
+      transition={{ duration: 0.62, delay, ease: premiumEase }}
     >
       {children}
     </motion.div>
@@ -48,7 +48,7 @@ export function MaskedWords({ text, className }: { text: string; className?: str
           <motion.span
             initial={reduceMotion ? false : { y: "115%", rotate: 2 }}
             animate={{ y: 0, rotate: 0 }}
-            transition={{ duration: 0.95, delay: 0.12 + index * 0.055, ease: premiumEase }}
+            transition={{ duration: 0.72, delay: 0.08 + index * 0.04, ease: premiumEase }}
           >
             {word}&nbsp;
           </motion.span>

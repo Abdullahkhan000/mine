@@ -1,58 +1,34 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
 import { portfolioImages } from "@/data/portfolio";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import { Reveal } from "@/components/ui/Motion";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-
-const disciplines = ["Backend systems", "REST APIs", "AI-powered applications", "Automation tools", "Database products", "Digital media workflows"];
+import { SectionMeta } from "@/components/ui/SectionMeta";
 
 export function About() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], [55, -45]);
-
   return (
-    <section ref={ref} className="about section-shell" id="about" aria-labelledby="about-heading">
-      <SectionHeading index="01" eyebrow="Profile / intent" title="ENGINEERING WITH A POINT OF VIEW." />
-      <div className="about__composition">
-        <motion.div className="about__portrait-wrap" style={{ y: imageY }}>
-          <div className="about__portrait" role={portfolioImages.profile ? undefined : "img"} aria-label={portfolioImages.profile ? undefined : "Profile image placeholder for Abdullah Ibrahim"}>
-            {portfolioImages.profile ? (
-              <Image src={portfolioImages.profile} alt="Portrait of Abdullah Ibrahim" fill sizes="(max-width: 760px) 75vw, 30vw" />
-            ) : (
-              <>
-                <div className="placeholder-cross" aria-hidden="true" />
-                <span>PROFILE IMAGE</span>
-                <strong>INSERT HERE</strong>
-                <small>04:05 / PORTRAIT</small>
-              </>
-            )}
-          </div>
-          <span className="about__portrait-caption">Abdullah Ibrahim<br />Backend developer &amp; AI builder</span>
-        </motion.div>
-
-        <div className="about__statement">
-          <Reveal>
-            <p className="display-copy" id="about-heading">
-              I TURN COMPLEX REQUIREMENTS INTO <em>USEFUL, DEPENDABLE</em> DIGITAL PRODUCTS.
-            </p>
-          </Reveal>
-          <Reveal className="about__body" delay={0.08}>
-            <span className="about__index">( A )</span>
-            <p>
-              I focus on the machinery behind strong product experiences: considered architecture, clear data, dependable APIs, practical intelligence, and workflows that hold up beyond the demo.
-            </p>
-          </Reveal>
-          <Reveal className="about__disciplines" delay={0.14}>
-            {disciplines.map((item, index) => (
-              <div key={item}><span>0{index + 1}</span><p>{item}</p></div>
-            ))}
-          </Reveal>
-        </div>
+    <section className="reference-section reference-about" id="about" aria-labelledby="about-title">
+      <div className="reference-grid" aria-hidden="true" />
+      <SectionMeta number="01" label="About me" />
+      <div className="reference-about__content">
+        <Reveal className="reference-about__label"><span id="about-title">About me</span></Reveal>
+        <Reveal className="reference-about__copy" delay={0.06}>
+          Abdullah Ibrahim is a backend-focused developer building structured, scalable digital products. Working across Python, Django, APIs, AI integration, automation, databases, and media workflows, his focus stays on how products function, grow, and remain useful beyond launch.
+        </Reveal>
+        <Reveal className="reference-about__action" delay={0.12}>
+          <ArrowUpRight />
+          <a className="reference-button" href="#services">More about the work</a>
+        </Reveal>
       </div>
+      <Reveal className="reference-markers"><span>º</span><span>∞</span><span>º</span></Reveal>
+      <Reveal className="reference-about__image" amount={0.25}>
+        {portfolioImages.heroDetail ? (
+          <Image src={portfolioImages.heroDetail} alt="A detail representing Abdullah Ibrahim's work" fill sizes="(max-width: 760px) 90vw, 32vw" />
+        ) : (
+          <div role="img" aria-label="About image placeholder"><span>[PROFILE DETAIL IMAGE — INSERT HERE]</span></div>
+        )}
+      </Reveal>
     </section>
   );
 }
