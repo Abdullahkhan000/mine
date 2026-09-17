@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#e7e5df"/>
+  <path d="M0 0h22v630H0zM1178 0h22v630h-22z" fill="#11120f"/>
+  <circle cx="1042" cy="122" r="56" fill="#f0ff6a" stroke="#11120f" stroke-width="3"/>
+  <text x="70" y="96" font-family="Arial, sans-serif" font-size="24" letter-spacing="5" fill="#11120f">ABDULLAH IBRAHIM</text>
+  <text x="70" y="286" font-family="Arial Black, Arial, sans-serif" font-size="94" letter-spacing="-5" fill="#11120f">SERIOUS DIGITAL</text>
+  <text x="70" y="386" font-family="Arial Black, Arial, sans-serif" font-size="94" letter-spacing="-5" fill="#11120f">PRODUCTS.</text>
+  <text x="74" y="540" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#11120f">PYTHON · DJANGO · AI BUILDER</text>
+</svg>
