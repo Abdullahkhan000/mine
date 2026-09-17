@@ -5,12 +5,9 @@ export type Project = {
   technologies: string[];
   image: string | null;
   imagePlaceholder: string;
-  secondaryImage: string | null;
-  secondaryImagePlaceholder: string;
   liveUrl: string;
   githubUrl: string;
   featured: boolean;
-  year: string;
 };
 
 export const portfolioLinks = {
@@ -18,24 +15,31 @@ export const portfolioLinks = {
   email: "EMAIL_HERE",
   github: "GITHUB_URL_HERE",
   linkedin: "LINKEDIN_URL_HERE",
+  x: "X_URL_HERE",
   cv: "CV_URL_HERE",
-  cybercarnage: "CYBERCARNAGE_LIVE_URL",
-  cybercarnageGithub: "CYBERCARNAGE_GITHUB_URL",
+  cybercarnage: "CYBERCARNAGE_URL_HERE",
+  cybercarnageGithub: "CYBERCARNAGE_GITHUB_URL_HERE",
   project02: "PROJECT_02_URL_HERE",
-  project02Github: "PROJECT_02_GITHUB_HERE",
+  project02Github: "PROJECT_02_GITHUB_URL_HERE",
   project03: "PROJECT_03_URL_HERE",
-  project03Github: "PROJECT_03_GITHUB_HERE",
+  project03Github: "PROJECT_03_GITHUB_URL_HERE",
 } as const;
 
 export const portfolioImages = {
   profile: null as string | null,
+  heroDetail: null as string | null,
+  processDiscover: null as string | null,
+  processArchitect: null as string | null,
+  processBuild: null as string | null,
+  processRefine: null as string | null,
+  contactVisual: null as string | null,
 } as const;
 
 export const navigation = [
-  { label: "Work", href: "#work" },
+  { label: "Home", href: "#top" },
+  { label: "Works", href: "#work" },
   { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Resume", href: "#resume" },
+  { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -43,7 +47,7 @@ export const projects: Project[] = [
   {
     title: "CyberCarnage",
     description:
-      "A gaming intelligence and AI database platform unifying discovery, AI assistance, quizzes, reviews, comparisons, upcoming releases, tier lists, and developer-facing API functionality.",
+      "A gaming intelligence and AI database platform combining discovery, AI assistance, quizzes, reviews, comparisons, upcoming games, tier lists, and developer/API functionality.",
     category: "Gaming intelligence • AI • API • SaaS",
     technologies: [
       "Django",
@@ -55,84 +59,100 @@ export const projects: Project[] = [
       "APIs",
     ],
     image: null,
-    imagePlaceholder: "CYBERCARNAGE SCREENSHOT — INSERT HERE",
-    secondaryImage: null,
-    secondaryImagePlaceholder: "CYBERCARNAGE DETAIL — OPTIONAL",
+    imagePlaceholder: "CYBERCARNAGE IMAGE — INSERT HERE",
     liveUrl: portfolioLinks.cybercarnage,
     githubUrl: portfolioLinks.cybercarnageGithub,
     featured: true,
-    year: "CURRENT",
   },
   {
-    title: "[ADD PROJECT 02 TITLE]",
-    description: "[ADD PROJECT 02 DESCRIPTION]",
-    category: "[ADD PROJECT 02 CATEGORY]",
+    title: "[PROJECT 02 TITLE]",
+    description: "[PROJECT 02 DESCRIPTION]",
+    category: "[PROJECT 02 CATEGORY]",
     technologies: ["[ADD TECHNOLOGIES]"],
     image: null,
-    imagePlaceholder: "PROJECT 02 SCREENSHOT — INSERT HERE",
-    secondaryImage: null,
-    secondaryImagePlaceholder: "PROJECT 02 DETAIL — OPTIONAL",
+    imagePlaceholder: "PROJECT 02 IMAGE — INSERT HERE",
     liveUrl: portfolioLinks.project02,
     githubUrl: portfolioLinks.project02Github,
     featured: false,
-    year: "[YEAR]",
   },
   {
-    title: "[ADD PROJECT 03 TITLE]",
-    description: "[ADD PROJECT 03 DESCRIPTION]",
-    category: "[ADD PROJECT 03 CATEGORY]",
+    title: "[PROJECT 03 TITLE]",
+    description: "[PROJECT 03 DESCRIPTION]",
+    category: "[PROJECT 03 CATEGORY]",
     technologies: ["[ADD TECHNOLOGIES]"],
     image: null,
-    imagePlaceholder: "PROJECT 03 SCREENSHOT — INSERT HERE",
-    secondaryImage: null,
-    secondaryImagePlaceholder: "PROJECT 03 DETAIL — OPTIONAL",
+    imagePlaceholder: "PROJECT 03 IMAGE — INSERT HERE",
     liveUrl: portfolioLinks.project03,
     githubUrl: portfolioLinks.project03Github,
     featured: false,
-    year: "[YEAR]",
   },
 ];
 
-export const technologies = [
-  { name: "Python", detail: "Backend systems, automation, and data workflows", group: "Core" },
-  { name: "Django", detail: "Production web applications and admin systems", group: "Core" },
-  { name: "Django REST Framework", detail: "Structured, scalable API development", group: "Core" },
-  { name: "REST APIs", detail: "Clear contracts and dependable integrations", group: "Core" },
-  { name: "PostgreSQL", detail: "Relational data modeling and persistence", group: "Data" },
-  { name: "AI API Integration", detail: "Useful intelligence inside real product flows", group: "Intelligence" },
-  { name: "FFmpeg", detail: "Media transformation and processing pipelines", group: "Media" },
-  { name: "Video Encoding", detail: "Reliable output across formats and destinations", group: "Media" },
-  { name: "JavaScript", detail: "Responsive product interfaces and interactions", group: "Interface" },
-  { name: "HTML", detail: "Semantic, accessible document structure", group: "Interface" },
-  { name: "CSS", detail: "Responsive systems and interaction design", group: "Interface" },
-  { name: "Tailwind CSS", detail: "Fast, consistent interface implementation", group: "Interface" },
-  { name: "Git", detail: "Disciplined version control and delivery", group: "Workflow" },
-  { name: "GitHub", detail: "Collaborative code and release workflows", group: "Workflow" },
-] as const;
-
 export const services = [
-  { title: "Backend Development", code: "01", detail: "Robust server-side foundations built for real product requirements." },
-  { title: "Django / DRF", code: "02", detail: "Clean Django applications and well-structured REST interfaces." },
-  { title: "API Development", code: "03", detail: "Purposeful APIs with dependable contracts, security, and documentation." },
-  { title: "AI Integration", code: "04", detail: "Practical AI capabilities embedded into useful, maintainable workflows." },
-  { title: "Automation", code: "05", detail: "Repeatable systems that remove manual work and operational friction." },
-  { title: "Database Applications", code: "06", detail: "Data-led products with considered models, queries, and admin tooling." },
-  { title: "Media / Video Processing", code: "07", detail: "Automated media workflows using FFmpeg and reliable encoding pipelines." },
+  { title: "Backend Development", detail: "Production-minded server foundations for web applications and digital products.", code: "01" },
+  { title: "Django / DRF", detail: "Structured Django applications, admin systems, and maintainable REST interfaces.", code: "02" },
+  { title: "API Development", detail: "Clear API contracts built for reliable integration, security, and long-term use.", code: "03" },
+  { title: "AI Integration", detail: "Useful AI capabilities integrated into real product and operational workflows.", code: "04" },
+  { title: "Automation", detail: "Repeatable systems that reduce manual work and operational friction.", code: "05" },
+  { title: "Media Processing", detail: "Dependable FFmpeg and video-encoding pipelines for digital media products.", code: "06" },
 ] as const;
 
-export const approach = [
-  { number: "01", title: "Define the useful thing", text: "Start with the product objective, the people using it, and the constraints that matter." },
-  { number: "02", title: "Architect for reality", text: "Shape the data, API boundaries, and operational flow before adding surface complexity." },
-  { number: "03", title: "Build the critical path", text: "Deliver the central experience with clarity, observability, and room to extend." },
-  { number: "04", title: "Refine and release", text: "Test the edge cases, polish the interaction, and leave a system that can keep moving." },
+export const processSteps = [
+  {
+    number: "01",
+    title: "Discover",
+    text: "Clarify the product goal, the people using it, the constraints, and the critical path before choosing implementation details.",
+    imageKey: "processDiscover",
+    placeholder: "DISCOVERY VISUAL — INSERT HERE",
+  },
+  {
+    number: "02",
+    title: "Architect",
+    text: "Shape the data model, system boundaries, API contracts, and operational flow around the real requirements.",
+    imageKey: "processArchitect",
+    placeholder: "ARCHITECTURE VISUAL — INSERT HERE",
+  },
+  {
+    number: "03",
+    title: "Build",
+    text: "Implement the central experience with clear code, dependable behavior, and room for the product to evolve.",
+    imageKey: "processBuild",
+    placeholder: "BUILD VISUAL — INSERT HERE",
+  },
+  {
+    number: "04",
+    title: "Refine",
+    text: "Test edge cases, tighten performance and interaction details, then prepare a maintainable release.",
+    imageKey: "processRefine",
+    placeholder: "REFINEMENT VISUAL — INSERT HERE",
+  },
 ] as const;
 
-export const resume = {
-  profile:
-    "Backend-focused developer building web applications, APIs, AI-enabled products, automation systems, and digital media workflows.",
-  education: "[EDUCATION DETAILS — ADD HERE]",
-  selectedProject: "CyberCarnage — Gaming intelligence, AI assistance, discovery, reviews, comparisons, and developer APIs.",
-};
+export const technologies = [
+  { name: "Python", detail: "Backend systems, automation, and data workflows" },
+  { name: "Django", detail: "Web applications and dependable server architecture" },
+  { name: "Django REST Framework", detail: "Structured, scalable API delivery" },
+  { name: "PostgreSQL", detail: "Relational data modeling and persistence" },
+  { name: "AI API Integration", detail: "Practical intelligence inside product flows" },
+  { name: "FFmpeg", detail: "Media transformation and encoding pipelines" },
+  { name: "JavaScript", detail: "Responsive product interfaces" },
+  { name: "Tailwind CSS", detail: "Consistent, maintainable interface systems" },
+] as const;
 
-export const isPlaceholderLink = (value: string) =>
-  /(_HERE|_URL|EMAIL_HERE|GITHUB_URL_HERE|LINKEDIN_URL_HERE)/.test(value);
+export const capabilities = [
+  { title: "API Architecture", text: "Clear interfaces for products, integrations, and future clients.", code: "01", tone: "red" },
+  { title: "AI Workflows", text: "Intelligence placed where it improves a real user or business task.", code: "02", tone: "blue" },
+  { title: "Automation", text: "Repeatable tools that remove manual operational steps.", code: "03", tone: "silver" },
+  { title: "Media Pipelines", text: "Reliable processing across formats, encodes, and destinations.", code: "04", tone: "orange" },
+] as const;
+
+export const systemRisks = [
+  ["Disconnected systems", "create avoidable friction"],
+  ["Vague API contracts", "slow every integration"],
+  ["Manual workflows", "waste time at scale"],
+  ["Unstructured data", "limits product decisions"],
+  ["Generic AI features", "add noise without utility"],
+  ["Fragile media pipelines", "break under real workloads"],
+] as const;
+
+export const isPlaceholderLink = (value: string) => /(_HERE|EMAIL_HERE)/.test(value);

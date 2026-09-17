@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { portfolioLinks } from "@/data/portfolio";
-import "@fontsource-variable/manrope";
+import "@fontsource-variable/inter";
+import "@fontsource/bebas-neue";
+import "@fontsource/fira-mono/400.css";
+import "@fontsource/fira-mono/500.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -31,8 +34,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#11120f",
-  colorScheme: "light",
+  themeColor: "#0c0c0c",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

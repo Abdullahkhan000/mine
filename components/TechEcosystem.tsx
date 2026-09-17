@@ -2,46 +2,28 @@
 
 import { motion } from "framer-motion";
 import { technologies } from "@/data/portfolio";
-import { Plus } from "@/components/ui/Icons";
 import { premiumEase, Reveal } from "@/components/ui/Motion";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionMeta } from "@/components/ui/SectionMeta";
 
 export function TechEcosystem() {
   return (
-    <section className="tech section-shell section-shell--dark" id="skills" aria-labelledby="skills-heading">
-      <SectionHeading index="02" eyebrow="Technology / ecosystem" title="TOOLS ARE ONLY USEFUL WHEN THEY SHIP." inverted />
-      <div className="tech__intro">
-        <Reveal><p id="skills-heading">A connected toolkit for taking products from structured backend to finished interface—and through the media and intelligence layers in between.</p></Reveal>
-        <Reveal delay={0.08}><span className="tech__note">Hover or focus to inspect the working role of each technology.</span></Reveal>
-      </div>
-      <div className="tech__grid">
+    <section className="reference-section ecosystem" id="skills" aria-labelledby="skills-title">
+      <div className="reference-grid" aria-hidden="true" />
+      <SectionMeta number="07" label="Technology" />
+      <Reveal><h2 id="skills-title">Technical<br />ecosystem</h2></Reveal>
+      <div className="reference-markers" aria-hidden="true"><span>º</span><span>∞</span><span>º</span></div>
+      <div className="ecosystem__constellation">
         {technologies.map((technology, index) => (
           <motion.article
-            className="tech-card"
             key={technology.name}
-            tabIndex={0}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: (index % 4) * 0.045, duration: 0.65, ease: premiumEase }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.55, delay: (index % 4) * 0.05, ease: premiumEase }}
           >
-            <span className="tech-card__number">{String(index + 1).padStart(2, "0")}</span>
-            <span className="tech-card__group">{technology.group}</span>
-            <h3>{technology.name}</h3>
-            <p>{technology.detail}</p>
-            <Plus className="tech-card__icon" />
+            <span>0{index + 1}</span><h3>{technology.name}</h3><p>{technology.detail}</p>
           </motion.article>
         ))}
-      </div>
-      <div className="tech__marquee" aria-hidden="true">
-        <div>
-          <span>ARCHITECTURE</span><i />
-          <span>INTELLIGENCE</span><i />
-          <span>AUTOMATION</span><i />
-          <span>MEDIA</span><i />
-          <span>ARCHITECTURE</span><i />
-          <span>INTELLIGENCE</span><i />
-        </div>
       </div>
     </section>
   );

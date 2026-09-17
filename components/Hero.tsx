@@ -1,60 +1,47 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { portfolioLinks } from "@/data/portfolio";
-import { ArrowDown, ArrowUpRight } from "@/components/ui/Icons";
+import { portfolioImages } from "@/data/portfolio";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import { MaskedWords, premiumEase } from "@/components/ui/Motion";
-import { SmartLink } from "@/components/ui/SmartLink";
 
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const orbY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const gridY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const { scrollY } = useScroll();
+  const backgroundY = useTransform(scrollY, [0, 1000], [0, 80]);
 
   return (
-    <section ref={ref} className="hero" id="top" aria-labelledby="hero-title">
-      <motion.div className="hero__grid" style={{ y: gridY }} aria-hidden="true" />
-      <motion.div className="hero__orb" style={{ y: orbY }} aria-hidden="true">
-        <div className="hero__orb-ring" />
-        <span>AI</span>
+    <section className="reference-hero" id="top" aria-labelledby="hero-title">
+      <motion.div className="reference-hero__media" style={{ y: backgroundY }}>
+        {portfolioImages.profile ? (
+          <Image src={portfolioImages.profile} alt="Portrait of Abdullah Ibrahim" fill priority sizes="100vw" />
+        ) : (
+          <div className="reference-hero__placeholder" role="img" aria-label="Profile image placeholder">
+            <span>[PROFILE / HERO IMAGE — INSERT HERE]</span>
+          </div>
+        )}
       </motion.div>
-      <motion.div className="hero__edition" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.05 }}>
-        <span>Independent developer</span><span>Selected portfolio / 2026</span>
+      <div className="reference-grid" aria-hidden="true" />
+
+      <h1 id="hero-title"><MaskedWords text="ABDULLAH IBRAHIM" /></h1>
+
+      <motion.div className="reference-hero__roles" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65, duration: 0.55 }}>
+        <span>Backend developer</span><span>API development</span><span>AI integration</span>
       </motion.div>
 
-      <div className="hero__content">
-        <motion.div className="hero__eyebrow" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.7 }}>
-          <span className="status-dot" />
-          <span>Available for freelance projects</span>
-        </motion.div>
+      <motion.div className="reference-hero__statement" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.78, duration: 0.65, ease: premiumEase }}>
+        <p>Engineering digital products built for scale and real-world use.</p>
+      </motion.div>
 
-        <h1 id="hero-title" className="hero__title">
-          <span className="hero__line"><MaskedWords text="I BUILD SERIOUS" /></span>
-          <span className="hero__line hero__line--indent"><MaskedWords text="DIGITAL PRODUCTS" /></span>
-          <span className="hero__line hero__line--accent"><MaskedWords text="THAT WORK." /></span>
-        </h1>
-
-        <div className="hero__lower">
-          <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.8, ease: premiumEase }}>
-            Backend systems, APIs, AI integrations, automation, and media workflows—engineered with purpose.
-          </motion.p>
-          <motion.div className="hero__actions" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.92, duration: 0.8, ease: premiumEase }}>
-            <SmartLink href="#work" className="button button--dark" magnetic>
-              <span>View my work</span><ArrowUpRight />
-            </SmartLink>
-            <SmartLink href={portfolioLinks.cv} className="button button--line" magnetic>
-              <span>View resume</span><ArrowDown />
-            </SmartLink>
-          </motion.div>
+      <motion.div className="reference-hero__detail" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.92, duration: 0.6, ease: premiumEase }}>
+        <ArrowUpRight />
+        <div className="reference-hero__detail-image">
+          {portfolioImages.heroDetail ? <Image src={portfolioImages.heroDetail} alt="Selected detail from Abdullah Ibrahim's work" fill sizes="160px" /> : <span>[DETAIL IMAGE]</span>}
         </div>
-      </div>
+      </motion.div>
 
-      <motion.a href="#about" className="scroll-cue" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.25 }} aria-label="Scroll to about section">
-        <span>Scroll to explore</span><ArrowDown />
-      </motion.a>
-      <div className="hero__role">Python <i aria-hidden="true" /> Django <i aria-hidden="true" /> AI Builder</div>
+      <motion.div className="reference-hero__year" initial={{ opacity: 0, x: 35 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.85, duration: 0.7, ease: premiumEase }}>20<br />26</motion.div>
+      <motion.div className="reference-hero__position" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>Python • Django • AI Builder</motion.div>
     </section>
   );
 }

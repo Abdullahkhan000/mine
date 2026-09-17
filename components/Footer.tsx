@@ -1,25 +1,29 @@
-import { portfolioLinks } from "@/data/portfolio";
+import { navigation, portfolioLinks } from "@/data/portfolio";
 import { ArrowUpRight } from "@/components/ui/Icons";
 import { SmartLink } from "@/components/ui/SmartLink";
 
 export function Footer() {
   return (
-    <footer className="footer section-shell">
-      <div className="footer__top">
-        <a className="footer__brand" href="#top"><span>AB</span><strong>Abdullah Ibrahim</strong></a>
-        <p>Python • Django • AI Builder</p>
-        <a className="footer__top-link" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    <footer className="reference-footer">
+      <div className="reference-grid" aria-hidden="true" />
+      <div className="reference-footer__lead">
+        <h2>Start a conversation</h2>
+        <p>For web applications, APIs, AI integrations, automation, databases, and digital media workflows.</p>
+        <SmartLink href={portfolioLinks.email} className="footer-email">{portfolioLinks.email} <ArrowUpRight /></SmartLink>
       </div>
-      <div className="footer__ticker" aria-hidden="true"><span>BUILD CLEARLY / SHIP CAREFULLY / STAY CURIOUS /</span></div>
-      <div className="footer__bottom">
-        <span>© {new Date().getFullYear()} Abdullah Ibrahim</span>
-        <nav aria-label="Social links">
-          <SmartLink href={portfolioLinks.github}>GitHub <ArrowUpRight /></SmartLink>
-          <SmartLink href={portfolioLinks.linkedin}>LinkedIn <ArrowUpRight /></SmartLink>
-          <SmartLink href={portfolioLinks.email}>Email <ArrowUpRight /></SmartLink>
-        </nav>
-        <span>Independent developer portfolio</span>
-      </div>
+      <nav className="reference-footer__navigation" aria-label="Footer navigation">
+        <span>Navigation</span>
+        {navigation.slice(1).map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
+      </nav>
+      <nav className="reference-footer__social" aria-label="Social profiles">
+        <span>Social</span>
+        <SmartLink href={portfolioLinks.github}>GitHub</SmartLink>
+        <SmartLink href={portfolioLinks.linkedin}>LinkedIn</SmartLink>
+        <SmartLink href={portfolioLinks.x}>X</SmartLink>
+        <SmartLink href={portfolioLinks.cv}>CV</SmartLink>
+      </nav>
+      <a className="reference-footer__top" href="#top">Back to top</a>
+      <div className="reference-footer__base"><span>Abdullah Ibrahim</span><span>Python • Django • AI Builder</span><span>© {new Date().getFullYear()}</span></div>
     </footer>
   );
 }
